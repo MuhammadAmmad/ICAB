@@ -1,0 +1,227 @@
+-- This CLP file was created using DB2LOOK Version "9.7" 
+-- Timestamp: 20-06-2016 11:38:23
+-- Database Name: IBM            
+-- Database Manager Version: DB2/NT64 Version 9.7.4        
+-- Database Codepage: 1252
+-- Database Collating Sequence is: UNIQUE
+
+
+CONNECT TO IBM;
+
+
+
+-- Mimic tablespace
+
+ALTER TABLESPACE SYSCATSPACE
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      NO FILE SYSTEM CACHING 
+      AUTORESIZE YES 
+      TRANSFERRATE 0.060000;
+
+
+ALTER TABLESPACE TEMPSPACE1
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      FILE SYSTEM CACHING 
+      TRANSFERRATE 0.060000;
+
+
+ALTER TABLESPACE USERSPACE1
+      PREFETCHSIZE AUTOMATIC
+      OVERHEAD 7.500000
+      NO FILE SYSTEM CACHING 
+      AUTORESIZE YES 
+      TRANSFERRATE 0.060000;
+
+
+------------------------------------------------
+-- DDL Statements for table "ALVA    "."CAB"
+------------------------------------------------
+ 
+
+CREATE TABLE "ALVA    "."CAB"  (
+		  "CABID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +2147483647  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "CABNAME" VARCHAR(20) NOT NULL , 
+		  "CABNUMBER" VARCHAR(10) NOT NULL , 
+		  "CABTYPE" VARCHAR(10) NOT NULL , 
+		  "NSEATS" VARCHAR(2) NOT NULL , 
+		  "CABCOLOR" VARCHAR(10) NOT NULL , 
+		  "STATUS" VARCHAR(15) NOT NULL WITH DEFAULT 'AVAILABLE' )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "ALVA    "."CAB"
+
+ALTER TABLE "ALVA    "."CAB" 
+	ADD CONSTRAINT "CC1465452900013" PRIMARY KEY
+		("CABID");
+
+
+
+ALTER TABLE "ALVA    "."CAB" ALTER COLUMN "CABID" RESTART WITH 87;
+
+------------------------------------------------
+-- DDL Statements for table "ALVA    "."DRIVER"
+------------------------------------------------
+ 
+
+CREATE TABLE "ALVA    "."DRIVER"  (
+		  "DID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +2147483647  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "FULLNAME" VARCHAR(40) NOT NULL , 
+		  "EMAIL" VARCHAR(40) NOT NULL , 
+		  "DOB" DATE NOT NULL , 
+		  "MOBNO" VARCHAR(12) NOT NULL , 
+		  "CITY" VARCHAR(30) NOT NULL , 
+		  "STATUS" VARCHAR(15) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+-- DDL Statements for primary key on Table "ALVA    "."DRIVER"
+
+ALTER TABLE "ALVA    "."DRIVER" 
+	ADD CONSTRAINT "CC1465744641990" PRIMARY KEY
+		("DID");
+
+
+
+ALTER TABLE "ALVA    "."DRIVER" ALTER COLUMN "DID" RESTART WITH 52;
+
+------------------------------------------------
+-- DDL Statements for table "ALVA    "."ADMIN"
+------------------------------------------------
+ 
+
+CREATE TABLE "ALVA    "."ADMIN"  (
+		  "USERNAME" VARCHAR(40) NOT NULL , 
+		  "PASSWORD" VARCHAR(40) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+
+
+
+
+------------------------------------------------
+-- DDL Statements for table "ALVA    "."BOOKING"
+------------------------------------------------
+ 
+
+CREATE TABLE "ALVA    "."BOOKING"  (
+		  "BID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +2147483647  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "UNAME" VARCHAR(40) NOT NULL , 
+		  "CABID" INTEGER NOT NULL , 
+		  "STARTP" VARCHAR(200) NOT NULL , 
+		  "ENDP" VARCHAR(200) NOT NULL , 
+		  "DATE" DATE NOT NULL , 
+		  "TIME" TIME NOT NULL , 
+		  "CITY" VARCHAR(25) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+
+
+
+
+ALTER TABLE "ALVA    "."BOOKING" ALTER COLUMN "BID" RESTART WITH 18;
+
+------------------------------------------------
+-- DDL Statements for table "ALVA    "."REGISTERCUST"
+------------------------------------------------
+ 
+
+CREATE TABLE "ALVA    "."REGISTERCUST"  (
+		  "UID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +2147483647  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "UNAME" VARCHAR(40) NOT NULL , 
+		  "PWD" VARCHAR(32) NOT NULL , 
+		  "EMAIL" VARCHAR(50) NOT NULL , 
+		  "DOB" DATE NOT NULL , 
+		  "CITY" VARCHAR(25) NOT NULL , 
+		  "FULLNAME" VARCHAR(50) NOT NULL , 
+		  "MOBNO" VARCHAR(15) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+
+
+
+
+ALTER TABLE "ALVA    "."REGISTERCUST" ALTER COLUMN "UID" RESTART WITH 22;
+
+------------------------------------------------
+-- DDL Statements for table "ALVA    "."CONTACT"
+------------------------------------------------
+ 
+
+CREATE TABLE "ALVA    "."CONTACT"  (
+		  "ID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (  
+		    START WITH +1  
+		    INCREMENT BY +1  
+		    MINVALUE +1  
+		    MAXVALUE +2147483647  
+		    NO CYCLE  
+		    NO CACHE  
+		    NO ORDER ) , 
+		  "NAME" VARCHAR(50) NOT NULL , 
+		  "EMAIL" VARCHAR(100) NOT NULL , 
+		  "TEL" VARCHAR(15) NOT NULL , 
+		  "MSG" VARCHAR(2000) NOT NULL )   
+		 IN "USERSPACE1" ; 
+
+
+
+
+
+
+ALTER TABLE "ALVA    "."CONTACT" ALTER COLUMN "ID" RESTART WITH 3;
+
+
+
+
+
+
+
+COMMIT WORK;
+
+CONNECT RESET;
+
+TERMINATE;
+
+-- Specified SCHEMA is: ALVA
+-- The db2look utility will consider only the specified tables 
+-- Creating DDL for table(s)
+
+-- Schema name is ignored for the Federated Section
+-- Binding package automatically ... 
+-- Bind is successful
+-- Binding package automatically ... 
+-- Bind is successful
+;
